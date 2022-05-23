@@ -354,9 +354,24 @@ header
             padding: 0 12px 0 1.2rem;
             flex-direction: row;
             align-items: center;
-            div:first-child
+            justify-content: space-between;
+            min-width: 270px;
+            max-width: 270px;
+            &.active div:first-child
             {
-                margin-right: 4rem;
+                max-width: 5rem;
+            }
+            div:first-child
+            {                
+                max-width: 128px;
+                p{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
+                    width: 100%;
+                    min-width: 100%;
+                    white-space: nowrap;
+                }
             }
         }
 

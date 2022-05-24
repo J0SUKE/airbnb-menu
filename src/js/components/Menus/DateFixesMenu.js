@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
+import { FilterContext } from '../Filter';
 
 function DateFixesMenu() {
   return (
@@ -60,10 +61,6 @@ function Calendar() {
                     </>
 
   function GoNext() {
-    // calendarWrapper.current.style.animation = `animateCalendarNext .4s`;  
-    // setTimeout(() => {
-    //   calendarWrapper.current.style.animation = `unset`;  
-    // }, 400);
     setLeftMonth(leftMonth=>leftMonth+1);
   }
 
@@ -81,7 +78,6 @@ function Calendar() {
             <div className="calendar-caroussel-container" ref={calendarWrapper}>
                 {calendarSile}
             </div>
-            
         </div>
     </>
   )
@@ -91,6 +87,8 @@ function Calendar() {
 function Month({decallage}) 
 {
   
+  const{datesFixes,setDatesFixes,selectedZone,setSelectedZone} = useContext(FilterContext);
+
   const NOW = new Date();
   
   let month = new Date();
@@ -99,8 +97,42 @@ function Month({decallage})
   let days = [];  
   
   let currentMonthName = month.toLocaleString('default', { month: 'long' });
+  
   let currentYear = month.getFullYear();
   
+  function selectDate(date) {
+    
+    if (selectedZone=="arivee") {
+      setSelectedZone("depart");
+    }
+
+    if (datesFixes.arivee!=null) 
+    {
+      if (selectedZone=="depart")
+      {
+          if (date.getTime()<datesFixes.arivee.getTime()) 
+          {
+            setDatesFixes({
+              depart:null,
+              arivee:date
+            })
+
+            return;
+          }    
+      }
+    }
+
+
+    setDatesFixes((datesFixes)=>{
+      
+      return({
+        ...datesFixes,
+        [selectedZone]:date
+      })
+    })
+  }
+
+
   for (let j = 0; j < 6; j++) // max 6 collonnes 
   {
     for (let i = 0; i < 7; i++) //max 7 lignes 
@@ -109,22 +141,57 @@ function Month({decallage})
       
       if (calendarDays[month.getDay()]==i) 
       {
-        let liClass = (month.getTime()>=NOW.getTime() ? "" : "outdated");
+        let currentDay = month.getDate();// le jour du mois 
+        
+        let dateFormat = `${currentDay} ${currentMonthName}`; // la date au format : 1 mai
 
+
+        // on s'occupe de la class de li=================================================
+
+        let liClass = (month.getTime()>=NOW.getTime() ? "" : "outdated");
+        
+        let departFormated = (datesFixes.depart==null? "" : `${datesFixes.depart.getDate()} ${datesFixes.depart.toLocaleString('default', { month: 'long' })}`);
+        
+        let ariveeFormated = (datesFixes.arivee==null? "" : `${datesFixes.arivee.getDate()} ${datesFixes.arivee.toLocaleString('default', { month: 'long' })}`);
+
+        liClass+=((departFormated==dateFormat || ariveeFormated==dateFormat) ? "selected" : "");
+        
+
+        if (datesFixes.depart!=null && datesFixes.arivee!=null) 
+        {
+            if (isBetween(datesFixes.arivee,datesFixes.depart,month)) 
+            {
+                liClass+=" path";
+            }
+            
+        }
+        
+        //==============================================================================
+
+        let copy = new Date();
+        copy.setTime(month.getTime());
+        
         days.push(
           <li 
             className={liClass}
-            key={`${month.getDate()}${month.getFullYear()}`}
-          >{month.getDate()}</li>
+            key={`${dateFormat}`}
+            // on ajout l'event onclick seulement si la date n'est pas avant NOW
+            onClick={(month.getTime()>=NOW.getTime() ? ()=>{selectDate(copy)} : null)}
+            
+          ><p>{currentDay}</p></li>
         )  
 
         month.setDate(month.getDate()+1);
       }
       
+      //empty
       else
       {
         days.push(
-          <li className='empty'></li>
+          <li 
+            className='empty'
+            key={`${i}${j}`}  
+          ></li>
         )  
       }
         
@@ -142,6 +209,14 @@ function Month({decallage})
       </ul>
     </div>
   );
+}
+
+
+function isBetween(min,max,date) {
+  
+  
+  //console.log(date.getTime()>min.getTime() && date.getTime()<max.getTime());
+  return(date.getTime()>(min.getTime()) && date.getTime()<=(max.getTime()+1000*3600*24)); 
 }
 
 export default DateFixesMenu

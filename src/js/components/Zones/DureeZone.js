@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { FilterContext } from "../Filter";
 
 export default function DureeZone() {
-    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList} = useContext(FilterContext);
+    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes} = useContext(FilterContext);
     
     //console.log(monthsList);
     let monthsString = monthsList.join(",");
+
     return(
         <>
             {dateType=="fixes" ? 
@@ -15,11 +16,16 @@ export default function DureeZone() {
                                     setMenu("duree");
                                     setSelectedZone("arivee")
                                 }}
-                                className={selectedZone=="arivee" ? "active" : ""}
+                                className={`arrivee ${selectedZone=="arivee" ? "active" : ""}`}
                             >
                                 <div>
                                     <span>Arrivée</span>
-                                    <p className="empty">Quand</p>
+                                    {
+                                        datesFixes["arivee"]==null?
+                                        <p className="empty">Quand ?</p>
+                                        :
+                                        <p>{`${datesFixes["arivee"].getDate()} ${datesFixes["arivee"].toLocaleString('default', { month: 'long' })}`}</p>
+                                    }
                                 </div>
                             </li>
                             <li 
@@ -27,11 +33,16 @@ export default function DureeZone() {
                                     setMenu("duree");
                                     setSelectedZone("depart")
                                 }}
-                                className={selectedZone=="depart" ? "active" : ""}
+                                className={`depart ${selectedZone=="depart" ? "active" : ""}`}
                             >
                                 <div>
                                     <span>Départ</span>
-                                    <p className="empty">Quand</p>
+                                    {
+                                        datesFixes["depart"]==null?
+                                        <p className="empty">Quand ?</p>
+                                        :
+                                        <p>{`${datesFixes["depart"].getDate()} ${datesFixes["depart"].toLocaleString('default', { month: 'long' })}`}</p>
+                                    }
                                 </div>
                             </li>   
                         </> 

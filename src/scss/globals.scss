@@ -430,7 +430,21 @@ header
             top: -1px;
             left: -1px;     
         }
+
+        &.arrivee,&.depart
+        {
+            min-width: 164px;
+            max-width: 164px;
+            width: 164px;
+            p{
+                margin-right: none;
+                max-width: 5rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     }
+
 
     .search-btn
     {
@@ -999,17 +1013,12 @@ header
     .calendar-caroussel__wrapper
     {
         overflow: hidden;
+        display: flex;
         .calendar-caroussel-container
         {
+            min-width: 100%;
             display: flex;
             justify-content: space-between;
-            @keyframes animateCalendarNext {
-                from{
-                    transform: translateX(0);
-                }to{
-                    transform: translateX(-50%);
-                }
-            }
         }
         
     }
@@ -1038,9 +1047,17 @@ header
             border-radius: 50%;
             border: 2px solid transparent;
             cursor: pointer;
+            position: relative;
+            background: transparent;
+            p{
+                z-index: 2;
+            }
             &:hover
             {
-                border: 2px solid black;
+                &::after
+                {
+                    border: 2px solid black;
+                }
             }
             &.outdated
             {
@@ -1049,9 +1066,41 @@ header
             &.empty,&.outdated
             {
                 cursor: default;
-                &:hover
+                &::after
                 {
-                    border: 2px solid transparent;
+                    border: none;
+                }
+            }
+
+            &.selected
+            {
+                p{color: white;}
+                &::after
+                {
+                    border: 2px solid $font-gray;
+                    background: #222222;
+                }
+            }
+            
+            &::after
+            {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                z-index: 1;
+            }
+
+            &.path
+            {
+                &::before
+                {
+                    content: "";
+                    position: absolute;
+                    width: 49px;
+                    height: 48px;
+                    background: $hover-gray;
+                    z-index: 0;
                 }
             }
         }

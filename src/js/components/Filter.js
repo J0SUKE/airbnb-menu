@@ -19,19 +19,24 @@ function Filter() {
         babies:0,
         animals:0
     })
+    const[datesFixes,setDatesFixes] = useState({
+        depart:null,
+        arivee:null    
+    });
+
     const[monthsList,setMonthsList] = useState([]);
 
     const [destinatioValue,setDestinatioValue] = useState("");
 
     let FilterContextValue = {
-        setTypeFlexible:setTypeFlexible,
-        typeFlexible:typeFlexible,
-        setDateType:setDateType,
-        dateType:dateType,
-        menu:menu,
-        setMenu:setMenu,
-        selectedZone:selectedZone,
-        setSelectedZone:setSelectedZone,
+        setTypeFlexible,
+        typeFlexible,
+        setDateType,
+        dateType,
+        menu,
+        setMenu,
+        selectedZone,
+        setSelectedZone,
         destinatioValue,
         setDestinatioValue,
         voyageurs,
@@ -39,7 +44,9 @@ function Filter() {
         monthsList,
         setMonthsList,
         months,
-        setMonths
+        setMonths,
+        datesFixes,
+        setDatesFixes
     }
 
     useEffect(()=>{

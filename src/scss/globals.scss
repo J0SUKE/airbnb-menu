@@ -50,8 +50,10 @@ header
         justify-content: center;
         
         p{
-            font-weight: 500;
+            font-family: $font-bold;
+            font-size: 1.1rem;
             text-align: center;
+
         }
     }
 
@@ -761,7 +763,7 @@ header
         ul
         {
             display: flex;
-
+            transition: transform .5s;
         }
         li{
             width: 120px;
@@ -770,12 +772,16 @@ header
             min-height: 134px;
             border: 1px solid $border-gray;
             border-radius: 10px;
-            &:not(:last-of-type,:first-of-type)
+            &:not(:first-of-type,:last-of-type)
             {
                 margin: 0 .25rem;
             }
             &:first-of-type{
                 margin-right: .25rem;
+            }
+            &:last-of-type
+            {
+                margin-left: .25rem;
             }
             display: flex;
             align-items: center;

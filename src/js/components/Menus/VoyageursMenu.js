@@ -30,8 +30,8 @@ export default function VoyageursMenu() {
         })   
     }
 
+    //si adults est a 0 et que un des autre est a plus de 0 alors adultsMin devient 1 et voyageurs["adults"]=1
     useEffect(()=>{
-        //si adults et a 0 et que un des autre est a plus de 0 alors adultsMin devient 1 et voyageurs["adults"]=1
         
         if (voyageurs["adults"]==0) 
         {

@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { FilterContext } from "../Filter";
 
 export default function DureeZone() {
-    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone} = useContext(FilterContext);
+    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList} = useContext(FilterContext);
     
+    //console.log(monthsList);
+    let monthsString = monthsList.join(",");
     return(
         <>
             {dateType=="fixes" ? 
@@ -43,7 +45,7 @@ export default function DureeZone() {
                         >
                             <div>
                                 <span>Durée</span>
-                                <p>{typeFlexible} en</p>
+                                <p>{typeFlexible} en {monthsString}</p>
                             </div>
                         </li>}
         </>

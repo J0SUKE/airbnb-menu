@@ -12,12 +12,14 @@ export const FilterContext = React.createContext();
 function Filter() {
     const{selectedZone,setSelectedZone,menu,setMenu,dateType,setDateType} = useContext(HeaderContext);
     const[typeFlexible,setTypeFlexible] = useState("Une semaine");
+    const[months,setMonths] = useState({});
     const[voyageurs,setVoyageurs] = useState({
         adults:0,
         kids:0,
         babies:0,
         animals:0
     })
+    const[monthsList,setMonthsList] = useState([]);
 
     const [destinatioValue,setDestinatioValue] = useState("");
 
@@ -33,7 +35,11 @@ function Filter() {
         destinatioValue,
         setDestinatioValue,
         voyageurs,
-        setVoyageurs
+        setVoyageurs,
+        monthsList,
+        setMonthsList,
+        months,
+        setMonths
     }
 
     useEffect(()=>{

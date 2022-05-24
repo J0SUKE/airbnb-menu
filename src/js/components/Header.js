@@ -17,7 +17,7 @@ function Header({children}) {
         document.querySelector(".filter-menu-section").classList.add("active");
     }
     
-    const [dateType,setDateType] = useState("flexibles");// ou fixes
+    const [dateType,setDateType] = useState("fixes");// ou flexibles
     const[menu,setMenu] = useState(null);
     const[selectedZone,setSelectedZone] = useState(null);
 

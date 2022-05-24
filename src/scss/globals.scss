@@ -342,6 +342,12 @@ header
                 padding: 0 1.2rem;
             }        
             flex-grow: 1;
+            p{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 250px;
+            }
         }
         
         &:first-of-type
@@ -809,21 +815,26 @@ header
             }
 
             &.active
-            {
-                animation: animateDate .5s 1s forwards;
-                @keyframes animateDate {
-                    0%{
-                        transform: scale(1);
-                    }50%{
-                        transform: scale(0.9);
-                    }100%{
-                        transform: scale(1);
-                    }
-                }
+            {   
                 border: 2px solid black;
                 background: #F7F7F7;
             }
+            &.inactive
+            {
+                border: 2px solid $border-gray;
+                background: transparent;
+            }
             
+            @keyframes animateDate {
+                0%{
+                    transform: scale(1);
+                }50%{
+                    transform: scale(0.9);
+                }100%{
+                    transform: scale(1);
+                }
+            }
+
         }
     }
 

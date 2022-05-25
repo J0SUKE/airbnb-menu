@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { FilterContext } from "../Filter";
 
 export default function DureeZone() {
-    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes} = useContext(FilterContext);
-    
+    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes,dateFixeRange} = useContext(FilterContext);
     //console.log(monthsList);
     let monthsString = monthsList.join(",");
 
@@ -24,7 +23,9 @@ export default function DureeZone() {
                                         datesFixes["arivee"]==null?
                                         <p className="empty">Quand ?</p>
                                         :
-                                        <p>{`${datesFixes["arivee"].getDate()} ${datesFixes["arivee"].toLocaleString('default', { month: 'long' })}`}</p>
+                                        <p>{`${datesFixes["arivee"].getDate()} ${datesFixes["arivee"].toLocaleString('default', { month: 'long' })}`}
+                                        <strong>{dateFixeRange}</strong>
+                                        </p>
                                     }
                                 </div>
                             </li>
@@ -41,7 +42,9 @@ export default function DureeZone() {
                                         datesFixes["depart"]==null?
                                         <p className="empty">Quand ?</p>
                                         :
-                                        <p>{`${datesFixes["depart"].getDate()} ${datesFixes["depart"].toLocaleString('default', { month: 'long' })}`}</p>
+                                        <p>{`${datesFixes["depart"].getDate()} ${datesFixes["depart"].toLocaleString('default', { month: 'long' })}`}
+                                        <strong>{dateFixeRange}</strong>
+                                        </p>
                                     }
                                 </div>
                             </li>   

@@ -2,6 +2,10 @@ import React, { useContext, useRef, useState } from 'react'
 import { FilterContext } from '../Filter';
 
 function DateFixesMenu() {
+  
+  const{dateFixeRange,setDateFixeRange} = useContext(FilterContext);
+
+
   return (
     <div className='dates-fixes'>
       <div className="calendar-caroussel">
@@ -29,11 +33,26 @@ function DateFixesMenu() {
       </div>
 
       <div className="dates-details">
-        <button className='active'>Dates exactes</button>
-        <button>± 1 jour</button>
-        <button>± 2 jours</button>
-        <button>± 3 jours</button>
-        <button>± 7 jours</button>
+        <button
+          className={dateFixeRange==null ? 'active' : ''}
+          onClick={()=>{setDateFixeRange(null)}}
+        >Dates exactes</button>
+        <button
+          className={dateFixeRange==" ± 1" ? 'active' : ''}
+          onClick={()=>{setDateFixeRange(" ± 1")}}
+        >± 1 jour</button>
+        <button
+          className={dateFixeRange==" ± 2" ? 'active' : ''}
+          onClick={()=>{setDateFixeRange(" ± 2")}}
+        >± 2 jours</button>
+        <button
+          onClick={()=>{setDateFixeRange(" ± 3")}}
+          className={dateFixeRange==" ± 3" ? 'active' : ''}
+        >± 3 jours</button>
+        <button
+          className={dateFixeRange==" ± 7" ? 'active' : ''}
+          onClick={()=>{setDateFixeRange(" ± 7")}}
+        >± 7 jours</button>
       </div>
     </div>
   )
@@ -116,7 +135,17 @@ function Month({decallage})
               depart:null,
               arivee:date
             })
-
+            return;
+          }    
+      }
+      if (selectedZone=="arivee")
+      {
+          if (date.getTime()>datesFixes.depart.getTime()) 
+          {
+            setDatesFixes({
+              depart:null,
+              arivee:date
+            })
             return;
           }    
       }
@@ -154,7 +183,9 @@ function Month({decallage})
         
         let ariveeFormated = (datesFixes.arivee==null? "" : `${datesFixes.arivee.getDate()} ${datesFixes.arivee.toLocaleString('default', { month: 'long' })}`);
 
-        liClass+=((departFormated==dateFormat || ariveeFormated==dateFormat) ? "selected" : "");
+        liClass+=((departFormated==dateFormat ) ? "selected depart" : "");
+        liClass+=((ariveeFormated==dateFormat) ? "selected arivee" : "");
+        
         
 
         if (datesFixes.depart!=null && datesFixes.arivee!=null) 
@@ -213,9 +244,7 @@ function Month({decallage})
 
 
 function isBetween(min,max,date) {
-  
-  
-  //console.log(date.getTime()>min.getTime() && date.getTime()<max.getTime());
+
   return(date.getTime()>(min.getTime()) && date.getTime()<=(max.getTime()+1000*3600*24)); 
 }
 

@@ -24,6 +24,8 @@ function Filter() {
         arivee:null    
     });
 
+    const [dateFixeRange,setDateFixeRange] = useState(null);
+
     const[monthsList,setMonthsList] = useState([]);
 
     const [destinatioValue,setDestinatioValue] = useState("");
@@ -46,7 +48,9 @@ function Filter() {
         months,
         setMonths,
         datesFixes,
-        setDatesFixes
+        setDatesFixes,
+        dateFixeRange,
+        setDateFixeRange
     }
 
     useEffect(()=>{

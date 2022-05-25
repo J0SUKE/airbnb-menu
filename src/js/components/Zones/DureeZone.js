@@ -2,9 +2,21 @@ import React, { useContext } from "react";
 import { FilterContext } from "../Filter";
 
 export default function DureeZone() {
-    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes,dateFixeRange} = useContext(FilterContext);
+    const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes,dateFixeRange,setDatesFixes} = useContext(FilterContext);
     //console.log(monthsList);
     let monthsString = monthsList.join(",");
+
+    function clearInputs(e) {
+        e.stopPropagation();
+        setDatesFixes({
+            depart:null,
+            arivee:null
+          })   
+
+        if (selectedZone=="depart") {
+            setSelectedZone("arivee");
+        }
+    }
 
     return(
         <>
@@ -28,6 +40,11 @@ export default function DureeZone() {
                                         </p>
                                     }
                                 </div>
+                                {
+                                    selectedZone=="arivee" ? 
+                                    (datesFixes["arivee"]==null ? null : <div><button onClick={clearInputs}>+</button></div>)
+                                    :null   
+                                }
                             </li>
                             <li 
                                 onClick={()=>{
@@ -47,6 +64,11 @@ export default function DureeZone() {
                                         </p>
                                     }
                                 </div>
+                                {
+                                    selectedZone=="depart" ? 
+                                    (datesFixes["depart"]==null ? null : <div><button onClick={clearInputs}>+</button></div>)
+                                    :null   
+                                }
                             </li>   
                         </> 
                         :
@@ -61,6 +83,7 @@ export default function DureeZone() {
                                 <span>Durée</span>
                                 <p>{typeFlexible} en {monthsString}</p>
                             </div>
+                            
                         </li>}
         </>
     )

@@ -31,7 +31,9 @@ function VoyageursZone()
                 voyageursList=="" ? 
                 <p className="empty">Qui ?</p>    
                 :
-                <p>{voyageursList}</p>    
+                <p
+                    style={selectedZone==null ? null : {maxWidth: 5 + 'rem'}}
+                >{voyageursList}</p>    
             }
         </div>
         <div 

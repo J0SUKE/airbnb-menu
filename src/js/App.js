@@ -4,9 +4,14 @@ import Filter,{DestinationMenu,DureeMenu,VoyageursMenu} from './components/Filte
 
 function App() {
   return (
-    <Header>
+    <>
+      <Header>
         <Filter/>
-    </Header>
+      </Header>
+      <div className="overlay">
+        
+      </div>
+    </>
   )
 }
 

@@ -124,6 +124,9 @@ function Month({decallage})
     if (selectedZone=="arivee") {
       setSelectedZone("depart");
     }
+    if (selectedZone=="depart" && datesFixes.arivee==null) {
+      setSelectedZone("arivee");
+    }
 
     if (datesFixes.arivee!=null) 
     {

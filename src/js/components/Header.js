@@ -15,6 +15,8 @@ function Header({children}) {
         
         document.querySelector(".filter").classList.add("active");
         document.querySelector(".filter-menu-section").classList.add("active");
+
+        document.querySelector(".overlay").style.display = "unset";
     }
     
     const [dateType,setDateType] = useState("fixes");// ou flexibles
@@ -44,7 +46,10 @@ function Header({children}) {
                     document.querySelector(".filter-menu-section").classList.add("inactive");
                     document.querySelector(".filter").classList.remove("active");
                     document.querySelector(".filter-menu-section").classList.remove("active");
+                    document.querySelector(".overlay").style.display = "none";
             }  
+
+            
         })
 
         window.addEventListener("keyup",(e)=>{
@@ -54,6 +59,8 @@ function Header({children}) {
                 document.querySelector(".filter-menu-section").classList.add("inactive");
                 document.querySelector(".filter").classList.remove("active");
                 document.querySelector(".filter-menu-section").classList.remove("active");
+
+                document.querySelector(".overlay").style.display = "none";
             }
         })
 
@@ -65,6 +72,8 @@ function Header({children}) {
                 document.querySelector(".filter-menu-section").classList.add("inactive");
                 document.querySelector(".filter").classList.remove("active");
                 document.querySelector(".filter-menu-section").classList.remove("active");
+
+                document.querySelector(".overlay").style.display = "none";
             }
         })
 

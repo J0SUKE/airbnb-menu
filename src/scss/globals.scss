@@ -93,8 +93,31 @@ header
         .userInfo
         {
             height: 40px;
-            width: 60px;
-            border: 1px solid black;        
+            width: 80px;
+            border-radius: 20px;
+            padding: 0 4px;
+            border: 1px solid $border-gray;
+            display: flex;
+            align-items: center;  
+            justify-content: space-between;      
+            flex-flow: row-reverse;
+            img{
+                height: 30px;
+                width: 30px;
+                display: block;
+            }
+            .hamburger
+            {
+                height: 30px;
+                width: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                svg{
+                    display: block; fill: none; height: 16px; width: 16px; stroke: currentcolor; stroke-width: 3; overflow: visible;
+                }
+            }
+
         }
     }
 }
@@ -1179,7 +1202,7 @@ header
 
 body{
     background: rgb(237, 237, 237);
-    background-image: url("mainBG.jpg");
+    //background-image: url("mainBG.jpg");
     background-size: cover;
     background-position: top;
 }

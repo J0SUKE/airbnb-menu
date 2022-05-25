@@ -36,7 +36,12 @@ function VoyageursZone()
                 >{voyageursList}</p>    
             }
         </div>
+        
         <div 
+            onClick={(e)=>{
+                e.stopPropagation();
+                location.replace(".")
+            }}
             className={`search-btn ${selectedZone==null ? "" : "active"}`}>
             <p>Rechercher</p>
         </div>

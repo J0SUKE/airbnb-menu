@@ -1,16 +1,18 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import { FilterContext } from '../Filter';
 
 export default function DestinationZone() {
     
     const {setMenu,selectedZone,setSelectedZone,destinatioValue,setDestinatioValue} = useContext(FilterContext);
-        
+    
+    const inputNode = useRef();
+
     return(
         <li 
             onClick={()=>{
                         setMenu("destination");
                         setSelectedZone("destination");
-                        document.querySelector(".filter-menu li input").focus();
+                        inputNode.current.focus();
                     }}
             className={selectedZone=="destination" ? "active" : ""}
         >
@@ -18,6 +20,7 @@ export default function DestinationZone() {
                 <label htmlFor=''>Destination</label>
                 <input type="text" placeholder="Recherchez des destinations"
                     value={destinatioValue}
+                    ref={inputNode}
                     onInput={(e)=>{setDestinatioValue(e.target.value)}}
                 />
             </div>

@@ -60,6 +60,8 @@ export default function DestinationMenu() {
                 <ul>
                     {
                         regions.map((reg)=>{
+                            //reg = ["nom de region" , url de l'image]
+                            
                             return(
                                 <li 
                                     className={region==reg[0] ? "active" : ""}

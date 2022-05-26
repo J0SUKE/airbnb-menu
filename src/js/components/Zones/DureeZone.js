@@ -3,7 +3,7 @@ import { FilterContext } from "../Filter";
 
 export default function DureeZone() {
     const {typeFlexible,dateType,setMenu,selectedZone,setSelectedZone,monthsList,datesFixes,dateFixeRange,setDatesFixes} = useContext(FilterContext);
-    //console.log(monthsList);
+
     let monthsString = monthsList.join(",");
 
     function clearInputs(e) {

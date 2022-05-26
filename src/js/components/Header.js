@@ -120,7 +120,6 @@ return (
                         onClick={()=>{
                             setMenu("destination");
                             setSelectedZone("destination");
-                            // utiliser une ref vers le input sur lequel on mettra le focus ici
                         }}
                     ></div>
                 </div>

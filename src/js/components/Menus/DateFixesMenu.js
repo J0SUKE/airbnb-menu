@@ -74,7 +74,7 @@ function Calendar() {
   const calendarWrapper = useRef();
 
 
-  let calendarSile = <>
+  let calendarSlide = <>
                         <Month decallage={leftMonth}/>
                         <Month decallage={leftMonth+1}/>
                     </>
@@ -83,11 +83,15 @@ function Calendar() {
     setLeftMonth(leftMonth=>leftMonth+1);
   }
 
+  function goPrev() {
+    setLeftMonth(leftMonth=>leftMonth-1);
+  }
+
   return(
     <>
       <button 
         className="caroussel-btn btn-prev"
-        onClick={()=>{setLeftMonth(leftMonth=>leftMonth-1)}}
+        onClick={goPrev}
         ></button>
       <button 
         className="caroussel-btn btn-next"
@@ -95,7 +99,7 @@ function Calendar() {
         ></button>
       <div className="calendar-caroussel__wrapper">
             <div className="calendar-caroussel-container" ref={calendarWrapper}>
-                {calendarSile}
+                {calendarSlide}
             </div>
         </div>
     </>

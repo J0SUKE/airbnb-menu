@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { FilterContext } from "../Filter";
 import DatesFlexiblesMenu from "./DatesFlexiblesMenu";
 import DateFixesMenu from "./DateFixesMenu";
